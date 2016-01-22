@@ -21,7 +21,7 @@ def compile_file(source_file):
                 c = f.read(1)
                 if len(c) == 0:
                     eof = True
-                elif c == '.':
+                elif c == '-':
                     program_n += 1
     except IOError:
         print "Error: could not open file."
@@ -30,7 +30,7 @@ def compile_file(source_file):
     binary = bin(program_n)[3:]
 
     if len(binary) % 3 != 0:
-        print "Error: either you have too many or too few dots."
+        print "Error: either you have too many or too few dashes."
         sys.exit(1)
 
     program = []
@@ -84,7 +84,7 @@ def run(program):
         elif c == LEFT:
             pointer -= 1
             if pointer < 0:
-                print "Error: either you have too many or too few dots. (out of bounds)"
+                print "Error: either you have too many or too few dashes. (out of bounds)"
                 break
         elif c == INC:
             mem[pointer] += 1
@@ -100,13 +100,13 @@ def run(program):
             if mem[pointer] == 0:
                 pc = match_loop(program, pc)
                 if pc < 0:
-                    print "Error: either you have too many or too few dots. (unmatched loop)"
+                    print "Error: either you have too many or too few dashes. (unmatched loop)"
                     break
         elif c == LOOP_END:
             if mem[pointer] != 0:
                 pc = match_loop(program, pc)
                 if pc < 0:
-                    print "Error: either you have too many or too few dots. (unmatched loop)"
+                    print "Error: either you have too many or too few dashes. (unmatched loop)"
                     break
         else:
             pass
